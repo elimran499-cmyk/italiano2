@@ -15,7 +15,7 @@ const STATS: { value: string; label: string; detail: string }[] = [
 ];
 
 export const StatsBand: React.FC = () => (
-  <section className="relative overflow-hidden bg-ink text-white">
+  <section className="relative overflow-hidden bg-canvas-alt text-ink border-y border-ink/8">
     <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none" />
     <span aria-hidden="true" className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
 
@@ -25,7 +25,7 @@ export const StatsBand: React.FC = () => (
           <div
             key={stat.label}
             className={`text-center lg:text-left ${
-              index > 0 ? 'lg:border-l lg:border-white/12 lg:pl-6' : ''
+              index > 0 ? 'lg:border-l lg:border-ink/10 lg:pl-6' : ''
             }`}
           >
             <dt className="sr-only">{stat.label}</dt>
@@ -36,7 +36,7 @@ export const StatsBand: React.FC = () => (
               <span className="mt-3 block font-display text-[13px] sm:text-sm font-extrabold uppercase tracking-[0.14em] text-brand-light">
                 {stat.label}
               </span>
-              <span className="mt-1.5 block text-xs sm:text-[13px] font-medium text-white/55">
+              <span className="mt-1.5 block text-xs sm:text-[13px] font-medium text-ink-soft">
                 {stat.detail}
               </span>
             </dd>

@@ -131,8 +131,8 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                 className={`relative rounded-xl p-6 sm:p-7 flex flex-col transition-colors duration-300 ${
                   isVip
                     ? isDeal
-                      ? 'bg-ink border-2 border-brand shadow-2xl shadow-brand/30'
-                      : 'bg-ink/95 border border-ink/10 shadow-xl shadow-ink/25'
+                      ? 'bg-brand-soft border-2 border-brand shadow-2xl shadow-brand/20'
+                      : 'bg-brand-soft/60 border border-brand/30 shadow-lg shadow-brand/10'
                     : isDeal
                       ? 'bg-paper border-2 border-brand shadow-2xl shadow-brand/20'
                       : 'bg-paper border border-ink/10 shadow-sm hover:shadow-md hover:border-ink/25'
@@ -155,7 +155,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                 {/* Durata */}
                 <p
                   className={`text-center text-xs sm:text-[13px] font-display font-extrabold uppercase tracking-[0.16em] mt-1 ${
-                    isVip ? 'text-brand-light' : 'text-brand-deep'
+                    'text-brand-deep'
                   }`}
                 >
                   {duration.label}
@@ -164,7 +164,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                 {/* Price — remounts on every tier / device change so it animates in */}
                 <p
                   className={`mt-3 text-center font-display text-4xl sm:text-[2.75rem] font-extrabold leading-none ${
-                    isVip ? 'text-white' : 'text-ink'
+                    'text-ink'
                   }`}
                 >
                   <RollingPrice value={formatEuro(price)} />
@@ -172,7 +172,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
 
                 <p
                   className={`mt-2 text-center text-[11px] sm:text-xs font-semibold ${
-                    isVip ? 'text-white/60' : 'text-ink-soft'
+                    'text-ink-soft'
                   }`}
                 >
                   ≈ <RollingPrice value={formatEuro(perMonth)} className="mx-0.5" /> al mese
@@ -180,7 +180,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
 
                 <p
                   className={`mt-2.5 text-center text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1.5 ${
-                    isVip ? 'text-white/60' : 'text-ink-soft'
+                    'text-ink-soft'
                   }`}
                 >
                   <Monitor className="w-3.5 h-3.5" />
@@ -202,7 +202,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     isDeal
                       ? 'bg-brand hover:bg-brand-deep text-white shadow-lg'
                       : isVip
-                        ? 'bg-paper hover:bg-paper/90 text-ink shadow-lg'
+                        ? 'bg-brand hover:bg-brand-deep text-white shadow-lg shadow-brand/25'
                         : 'bg-ink hover:bg-ink/90 text-white'
                   }`}
                 >
@@ -210,7 +210,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                   <span>{isVip ? 'Diventa VIP Ora' : 'Ordina Ora'}</span>
                 </a>
 
-                <div className={`mt-6 pt-5 border-t ${isVip ? 'border-ink/15' : 'border-ink/10'}`}>
+                <div className={`mt-6 pt-5 border-t ${isVip ? 'border-brand/25' : 'border-ink/10'}`}>
                   {/* Tier chip + heading */}
                   <div className="flex items-center gap-2.5">
                     <span
@@ -232,7 +232,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                   {/* Features — the list swaps wholesale when the tier changes */}
                   <ul
                       className={`mt-3.5 space-y-2 text-xs sm:text-[13px] font-medium ${
-                        isVip ? 'text-white/85' : 'text-ink'
+                        'text-ink'
                       }`}
                     >
                       {tier.features.map((feature) => (
@@ -252,7 +252,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
 
                 <div
                   className={`mt-5 text-center text-[11px] font-semibold flex items-center justify-center gap-1 ${
-                    isVip ? 'text-white/60' : 'text-ink-soft'
+                    'text-ink-soft'
                   }`}
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />

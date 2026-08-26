@@ -53,7 +53,7 @@ export const MobileNav: React.FC = () => {
   return (
     <nav
       aria-label="Navigazione principale"
-      className="lg:hidden fixed bottom-4 inset-x-4 z-40 bg-ink rounded-full shadow-2xl shadow-ink/40 px-2 py-2 flex items-center justify-around overflow-hidden"
+      className="lg:hidden fixed bottom-4 inset-x-4 z-40 bg-canvas/85 backdrop-blur-xl border border-ink/10 rounded-full shadow-2xl shadow-ink/15 px-2 py-2 flex items-center justify-around overflow-hidden"
     >
       <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none" />
 
@@ -67,7 +67,7 @@ export const MobileNav: React.FC = () => {
             aria-label={item.label}
             aria-current={isActive ? 'true' : undefined}
             className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-colors ${
-              isActive ? 'text-white bg-brand' : 'text-white/65 hover:text-white'
+              isActive ? 'text-white bg-brand' : 'text-ink-soft hover:text-ink'
             }`}
           >
             <Icon className="w-5 h-5" />
@@ -81,7 +81,7 @@ export const MobileNav: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contatto via WhatsApp"
-        className="relative flex items-center justify-center w-12 h-12 rounded-full text-white/65 hover:text-white transition-colors"
+        className="relative flex items-center justify-center w-12 h-12 rounded-full text-ink-soft hover:text-ink transition-colors"
       >
         <MessageCircle className="w-5 h-5" />
       </a>

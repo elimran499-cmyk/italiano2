@@ -59,7 +59,7 @@ const MediaCard: React.FC<{ item: MediaItem }> = ({ item }) => (
       </div>
     </div>
 
-    <h4 className="mt-2.5 text-sm font-bold text-white truncate group-hover:text-emerald-400 transition-colors">
+    <h4 className="mt-2.5 text-sm font-bold text-ink truncate group-hover:text-brand transition-colors">
       {item.title}
     </h4>
     <p className="text-[11px] font-semibold text-ink-soft truncate">
@@ -120,11 +120,11 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ row, speed = 28, directio
     <div className="space-y-3">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
+          <h3 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
             {row.title}
           </h3>
           {row.subtitle && (
-            <p className="text-xs sm:text-sm font-medium text-slate-400">{row.subtitle}</p>
+            <p className="text-xs sm:text-sm font-medium text-ink-soft">{row.subtitle}</p>
           )}
         </div>
       </div>
@@ -145,8 +145,8 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ row, speed = 28, directio
           </div>
         </div>
         {/* Fade masks so posters dissolve into the section on both sides */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-950 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-950 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-canvas to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-canvas to-transparent" />
       </div>
     </div>
   );
@@ -169,7 +169,7 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
   ];
 
   return (
-    <section id="film" className="py-14 sm:py-20 bg-slate-950 relative overflow-hidden">
+    <section id="film" className="py-14 sm:py-20 bg-canvas relative overflow-hidden border-y border-ink/8">
       {/* Ambient cinema glow, carrying the flag: green entering top left,
           red leaving bottom right */}
       <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none opacity-70" />
@@ -181,8 +181,7 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
         {/* Section Heading */}
         <SectionHeading
           label="Film & Serie TV"
-          tone="dark"
-          title={<>Il tuo <span className="hl-pill">cinema</span> personale, sempre aperto</>}
+                    title={<>Il tuo <span className="hl-pill">cinema</span> personale, sempre aperto</>}
           intro="Le serie più viste del momento, i film più premiati e i classici per la famiglia. Guardi quando vuoi e metti in pausa quando vuoi — tutto in italiano o sottotitolato."
         />
 
@@ -219,27 +218,27 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
         {/* Value props */}
         <div className="mt-9 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
-            <Subtitles className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <Subtitles className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-white text-sm">Audio e Sottotitoli in Italiano</h4>
+              <h4 className="font-bold text-ink text-sm">Audio e Sottotitoli in Italiano</h4>
               <p className="text-xs text-ink-soft font-medium mt-0.5">
                 Sottotitoli italiani su quasi ogni titolo e tantissimi film per bambini doppiati.
               </p>
             </div>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
-            <Download className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <Download className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-white text-sm">Riproduzione Immediata</h4>
+              <h4 className="font-bold text-ink text-sm">Riproduzione Immediata</h4>
               <p className="text-xs text-ink-soft font-medium mt-0.5">
                 Nessuna attesa e niente buffering — parte in 2 secondi su qualsiasi dispositivo.
               </p>
             </div>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
-            <Sparkles className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+            <Sparkles className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-bold text-white text-sm">Aggiornato Ogni Settimana</h4>
+              <h4 className="font-bold text-ink text-sm">Aggiornato Ogni Settimana</h4>
               <p className="text-xs text-ink-soft font-medium mt-0.5">
                 Le nuove uscite al cinema e le stagioni appena arrivate si aggiungono da sole.
               </p>

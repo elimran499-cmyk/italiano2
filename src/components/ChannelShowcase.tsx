@@ -163,13 +163,13 @@ export const ChannelShowcase: React.FC<ChannelShowcaseProps> = ({ onOpenCheckout
         </div>
 
         {/* Channel Banner Callout */}
-        <div className="relative overflow-hidden mt-10 max-w-4xl mx-auto bg-ink text-white rounded-xl p-6 sm:p-8 shadow-xl shadow-ink/20 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="relative overflow-hidden mt-10 max-w-4xl mx-auto bg-canvas text-ink rounded-xl p-6 sm:p-8 border border-ink/10 shadow-lg shadow-ink/5 flex flex-col sm:flex-row items-center justify-between gap-6">
           <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none" />
           <div className="relative space-y-1 text-center sm:text-left">
             <h3 className="font-display text-xl sm:text-2xl font-extrabold">
               Tutti i tuoi canali preferiti in un solo abbonamento
             </h3>
-            <p className="text-white/70 text-sm sm:text-base font-medium">
+            <p className="text-ink-soft text-sm sm:text-base font-medium">
               Scegli una durata di {DURATION_SUMMARY} e guardi entro 5 minuti sulla tua TV o sul telefono.
             </p>
           </div>

@@ -11,7 +11,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
   // Extra bottom padding on phones so the floating nav never covers content.
   return (
-    <footer className="relative overflow-hidden bg-slate-950 text-white/70 pt-16 pb-28 lg:pb-12">
+    <footer className="relative overflow-hidden bg-canvas text-ink-soft border-t border-ink/10 pt-16 pb-28 lg:pb-12">
       <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none opacity-80" />
       {/* Tricolore strip closing the page */}
       <span aria-hidden="true" className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
@@ -19,19 +19,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Top Footer Section */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-ink/10">
           
           {/* Brand Col */}
           <div className="md:col-span-5 space-y-4 text-left">
             <div className="flex items-center gap-2">
-              <Logo inverted />
+              <Logo />
             </div>
 
-            <p className="text-white/60 text-sm leading-relaxed max-w-sm">
+            <p className="text-ink-soft text-sm leading-relaxed max-w-sm">
               Il provider IPTV 4K premium numero #1 in Italia. Oltre {CHANNEL_COUNT} canali TV in diretta, tutto il grande sport italiano e {VOD_COUNT} film &amp; serie on demand su tutti i tuoi dispositivi.
             </p>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 bg-white/6 px-3 py-1.5 rounded-lg w-fit border border-slate-700">
+            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 bg-ink/5 px-3 py-1.5 rounded-lg w-fit border border-slate-700">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>99,9% di uptime su server dedicati europei</span>
             </div>
@@ -39,10 +39,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
 
           {/* Nav Links Col 1 */}
           <div className="md:col-span-3 space-y-3 text-left">
-            <h4 className="text-white font-extrabold text-sm uppercase tracking-wider">
+            <h4 className="text-ink font-extrabold text-sm uppercase tracking-wider">
               Navigazione Rapida
             </h4>
-            <ul className="space-y-2 text-sm text-white/60">
+            <ul className="space-y-2 text-sm text-ink-soft">
               <li>
                 <a href="#canali" className="hover:text-emerald-400 transition-colors">
                   Canali & Sport
@@ -73,10 +73,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
 
           {/* Quick Actions & Legal Col */}
           <div className="md:col-span-4 space-y-3 text-left">
-            <h4 className="text-white font-extrabold text-sm uppercase tracking-wider">
+            <h4 className="text-ink font-extrabold text-sm uppercase tracking-wider">
               Assistenza & Contatti
             </h4>
-            <p className="text-xs text-white/60 leading-relaxed">
+            <p className="text-xs text-ink-soft leading-relaxed">
               Domande su un pacchetto, su un canale o sull'installazione sulla tua TV? La nostra assistenza in italiano ti risponde su WhatsApp, di solito entro 2 minuti.
             </p>
 
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
                 href={CONTACT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-white/6 hover:bg-white/12 text-white font-bold text-xs rounded-xl border border-white/15 transition-colors text-center"
+                className="w-full py-2.5 px-4 bg-canvas hover:bg-ink/5 text-ink font-bold text-xs rounded-xl border border-ink/12 transition-colors text-center"
               >
                 Contattaci su WhatsApp
               </a>
@@ -101,9 +101,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
         </div>
 
         {/* Legal Disclaimer Box */}
-        <div className="bg-white/4 p-6 rounded-2xl border border-white/8 text-xs text-white/60 space-y-2 text-left">
+        <div className="bg-canvas-alt p-6 rounded-2xl border border-ink/8 text-xs text-ink-soft space-y-2 text-left">
           <div className="font-bold text-ink uppercase tracking-wider flex items-center gap-1.5">
-            <Lock className="w-3.5 h-3.5 text-white/60" />
+            <Lock className="w-3.5 h-3.5 text-ink-soft" />
             <span>Disclaimer e Informazioni Legali:</span>
           </div>
           <p className="leading-relaxed">
@@ -112,18 +112,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
         </div>
 
         {/* Bottom Bar: Copyright & Payment Badges */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 border-t border-white/8 pt-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-soft border-t border-ink/8 pt-6">
           <div className="flex items-center gap-1">
             <span>© {new Date().getFullYear()} Italia IPTV. Tutti i diritti riservati.</span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-white/60 font-medium">Pagamenti sicuri con:</span>
+            <span className="text-ink-soft font-medium">Pagamenti sicuri con:</span>
             <div className="flex items-center gap-2 font-bold text-ink">
-              <span className="px-2 py-0.5 bg-white/6 rounded text-[10px]">PayPal</span>
-              <span className="px-2 py-0.5 bg-white/6 rounded text-[10px]">Carta</span>
-              <span className="px-2 py-0.5 bg-white/6 rounded text-[10px]">Crypto</span>
-              <span className="px-2 py-0.5 bg-white/6 rounded text-[10px]">Apple Pay</span>
+              <span className="px-2 py-0.5 bg-ink/5 rounded text-[10px]">PayPal</span>
+              <span className="px-2 py-0.5 bg-ink/5 rounded text-[10px]">Carta</span>
+              <span className="px-2 py-0.5 bg-ink/5 rounded text-[10px]">Crypto</span>
+              <span className="px-2 py-0.5 bg-ink/5 rounded text-[10px]">Apple Pay</span>
             </div>
           </div>
         </div>

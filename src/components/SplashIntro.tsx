@@ -46,7 +46,7 @@ export const SplashIntro: React.FC = () => {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center gap-6"
+      className="fixed inset-0 z-[100] bg-canvas flex flex-col items-center justify-center gap-6"
       style={
         phase === 'out'
           ? { animation: `splash-out ${FADE_MS}ms ease-out forwards` }
@@ -54,7 +54,7 @@ export const SplashIntro: React.FC = () => {
       }
     >
       <LogoMark
-        inverted
+        
         className="w-20 h-20 sm:w-24 sm:h-24"
         style={{ animation: 'splash-mark-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both' }}
       />
@@ -63,7 +63,7 @@ export const SplashIntro: React.FC = () => {
         {WORD.split('').map((letter, i) => (
           <span
             key={`${letter}-${i}`}
-            className="font-display font-extrabold text-white text-3xl sm:text-4xl tracking-tight"
+            className="font-display font-bold text-ink text-3xl sm:text-4xl tracking-tight"
             style={{
               animation: 'splash-letter-in 420ms ease-out both',
               animationDelay: `${380 + i * 55}ms`
@@ -92,7 +92,7 @@ export const SplashIntro: React.FC = () => {
       />
 
       <span
-        className="font-display text-[11px] font-extrabold tracking-[0.28em] uppercase text-white/50"
+        className="font-display text-[11px] font-extrabold tracking-[0.28em] uppercase text-ink-soft"
         style={{ animation: 'splash-letter-in 420ms ease-out both', animationDelay: '900ms' }}
       >
         Streaming 4K Premium
