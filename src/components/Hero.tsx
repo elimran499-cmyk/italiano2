@@ -15,7 +15,13 @@ const POSTERS = Array.from(
       .filter((item) => Boolean(item.poster))
       .map((item) => [item.id, item])
   ).values()
-).slice(0, 14);
+).slice(0, 20);
+
+/** Row one leads, row two trails — split so the phone's two rows never align. */
+const ROWS = [
+  POSTERS.filter((_, index) => index % 2 === 0),
+  POSTERS.filter((_, index) => index % 2 === 1)
+];
 
 const PROOF = ['Attivo in 5 minuti', 'Senza contratto', 'Fino a 4K e 60 fps'];
 
@@ -78,33 +84,53 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
       </ul>
     </div>
 
-    {/* Catalogue band: one row of artwork, edge to edge, fading into the page */}
+    {/*
+      Catalogue band. Two rows on a phone, running against each other, so the
+      artwork reads as a moving wall on a narrow screen instead of a single thin
+      strip; one wider row from sm up, where a phone's height is not the
+      constraint.
+    */}
     <div
-      className="relative mt-16 lg:mt-20 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]"
+      className="relative mt-12 sm:mt-16 lg:mt-20 space-y-3 sm:space-y-0 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]"
       aria-hidden="true"
     >
-      <div className="flex w-max gap-3 sm:gap-4 marquee-left" style={{ '--marquee-duration': '52s' } as React.CSSProperties}>
-        {[0, 1].map((pass) => (
-          <div key={pass} className="flex gap-3 sm:gap-4 pr-3 sm:pr-4">
-            {POSTERS.map((item, index) => (
-              <div
-                key={`${pass}-${item.id}`}
-                className="relative w-28 sm:w-36 lg:w-44 aspect-2/3 shrink-0 overflow-hidden rounded-xl border border-ink/10 bg-ink/5"
-              >
-                <img
-                  src={item.poster}
-                  alt=""
-                  loading={pass === 0 && index < 5 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      {ROWS.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className={`flex w-max gap-3 sm:gap-4 ${
+            rowIndex === 0 ? 'marquee-left' : 'marquee-right sm:hidden'
+          }`}
+          style={
+            { '--marquee-duration': rowIndex === 0 ? '34s' : '40s' } as React.CSSProperties
+          }
+        >
+          {[0, 1].map((pass) => (
+            <div key={pass} className="flex gap-3 sm:gap-4 pr-3 sm:pr-4">
+              {row.map((item, index) => (
+                <div
+                  key={`${pass}-${item.id}`}
+                  className="group relative w-32 sm:w-36 lg:w-44 aspect-2/3 shrink-0 overflow-hidden rounded-xl border border-ink/10 bg-ink/5 shadow-sm"
+                >
+                  <img
+                    src={item.poster}
+                    alt=""
+                    loading={rowIndex === 0 && pass === 0 && index < 4 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  {/* Quality mark, as on the cards further down the page */}
+                  <span className="absolute top-1.5 right-1.5 rounded-md bg-ink/70 px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-white backdrop-blur-sm">
+                    4K
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+
       {/* The band sinks into the section below it */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-canvas to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-canvas to-transparent" />
     </div>
   </section>
 );
