@@ -36,7 +36,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
     : { type: 'spring' as const, stiffness: 420, damping: 34 };
 
   return (
-    <section id="prezzi" className="py-14 sm:py-20 bg-canvas-alt pattern-majolica relative">
+    <section id="prezzi" className="py-14 sm:py-20 bg-canvas-alt relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Heading */}

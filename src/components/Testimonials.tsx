@@ -5,7 +5,7 @@ import { SectionHeading } from './SectionHeading';
 
 export const Testimonials: React.FC = () => {
   return (
-    <section className="py-14 sm:py-20 bg-canvas-alt pattern-majolica relative border-t border-ink/10">
+    <section className="py-14 sm:py-20 bg-canvas-alt relative border-t border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -8,7 +8,7 @@
 
   /* Daylight surfaces: white page, cool grey seams, near-black type. */
   --color-canvas: #ffffff;
-  --color-canvas-alt: #fbfcfe;
+  --color-canvas-alt: #ffffff;
   --color-paper: #ffffff;
   --color-ink: #0d1420;
   --color-ink-soft: #5c6779;
@@ -157,15 +157,6 @@
       color-mix(in srgb, var(--color-italy-red) 18%, transparent),
       transparent 62%
     );
-}
-
-/* Faint majolica lattice, the diamond grid off a hand-painted Italian tile.
-   Sits behind the pale sections and reads as texture, never as decoration. */
-@utility pattern-majolica {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px);
-  background-size: 52px 52px;
 }
 
 /* Tricolore bar: green | white | red in equal thirds. Used as the rule under

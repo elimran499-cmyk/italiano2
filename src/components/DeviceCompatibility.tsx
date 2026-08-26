@@ -40,7 +40,7 @@ export const DeviceCompatibility: React.FC = () => {
   const activeDeviceObj = devices.find((d) => d.id === selectedDevice) || devices[0];
 
   return (
-    <section id="guida" className="py-14 sm:py-20 bg-canvas-alt pattern-majolica border-t border-ink/10">
+    <section id="guida" className="py-14 sm:py-20 bg-canvas-alt border-t border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading

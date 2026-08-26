@@ -101,7 +101,7 @@ export const ChannelShowcase: React.FC<ChannelShowcaseProps> = ({ onOpenCheckout
   return (
     <section
       id="canali"
-      className="py-14 sm:py-20 bg-canvas-alt pattern-majolica relative border-y border-ink/10"
+      className="py-14 sm:py-20 bg-canvas-alt relative border-y border-ink/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 

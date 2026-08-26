@@ -35,7 +35,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
   <section className="relative flex flex-col overflow-hidden pt-20 pb-0 sm:pt-28 lg:pt-36">
     {/* Azzurro light thrown from behind the headline */}
     <span aria-hidden="true" className="glow-azzurro absolute inset-x-0 -top-40 h-[38rem] pointer-events-none" />
-    <span aria-hidden="true" className="pattern-majolica absolute inset-0 pointer-events-none opacity-60" />
 
     <div className="relative order-last sm:order-first max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <LogoMark className="w-14 h-14 sm:w-16 sm:h-16 mx-auto" />
