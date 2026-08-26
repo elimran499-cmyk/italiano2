@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowUpRight, Layers } from 'lucide-react';
+import { ArrowUpRight, ShoppingCart } from 'lucide-react';
 import { Logo, LogoMark } from './Logo';
 import { CONTACT_LINK } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
             scrolls underneath.
           */}
           <div
-            className={`sm:hidden flex items-center justify-between gap-1 rounded-full transition-all duration-300 ${
+            className={`sm:hidden relative flex items-center justify-between gap-1 rounded-full transition-all duration-300 ${
               isScrolled
                 ? 'border border-transparent bg-transparent px-0 py-0 shadow-none backdrop-blur-none'
                 : 'border border-white/20 bg-ink/45 px-2 py-1.5 shadow-lg shadow-ink/25 backdrop-blur-xl'
@@ -76,11 +76,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
                 isScrolled ? 'h-11 shadow-xl shadow-brand/30' : 'h-9'
               }`}
             >
-              <Layers className="h-4 w-4" />
+              <ShoppingCart className="h-4 w-4" />
               <span>Ordina</span>
             </button>
 
-            <a href="#" className="flex items-center gap-2" aria-label="Italia IPTV">
+            <a
+              href="#"
+              aria-label="Italia IPTV"
+              className={`flex items-center gap-2 ${
+                isScrolled ? 'absolute left-1/2 -translate-x-1/2' : ''
+              }`}
+            >
               <LogoMark
                 className={`transition-all duration-300 ${
                   isScrolled ? 'w-11 h-11 shadow-xl shadow-ink/25 ring-1 ring-white/60' : 'w-[30px] h-[30px]'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, CheckCircle2 } from 'lucide-react';
+import { ShoppingCart, CheckCircle2 } from 'lucide-react';
 import { MEDIA_ROWS } from '../data/media';
 import { CONTACT_LINK } from '../data/contact';
 import { CHANNEL_COUNT, VOD_COUNT } from '../data/stats';
@@ -103,7 +103,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => {
               id="hero-btn-pacchetti"
               className="glass-brand flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white hover:brightness-110 transition-all active:scale-[0.98]"
             >
-              <Layers className="h-4 w-4" />
+              <ShoppingCart className="h-4 w-4" />
               Vedi i pacchetti
             </button>
 

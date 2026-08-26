@@ -8,8 +8,9 @@ import boltUrl from '../assets/logo-bolt-256.png';
  * the tab icon, the app icon and the Open Graph card — one asset a crawler can
  * fetch and index directly.
  *
- * The mark's middle band is white, so on light ground it sits on an ink tile;
- * `inverted` drops the tile for dark ground where the white already reads.
+ * The mark's middle band is white, so on light ground it sits on a frosted ink
+ * tile — dark enough to hold the white, translucent enough to take the colour
+ * of whatever passes behind it. `inverted` drops the tile for dark ground.
  */
 
 interface MarkProps {
@@ -22,7 +23,7 @@ interface MarkProps {
 export const LogoMark: React.FC<MarkProps> = ({ inverted = false, className = '', style }) => (
   <span
     className={`inline-flex items-center justify-center shrink-0 ${
-      inverted ? '' : 'bg-ink rounded-[26%]'
+      inverted ? '' : 'glass-ink rounded-[26%]'
     } ${className}`}
     style={style}
   >
