@@ -1,0 +1,6 @@
+{
+  "name": "Italia IPTV Italia",
+  "description": "Servizio di streaming IPTV premium per l'Italia con canali 4K, sport in diretta e film e serie on demand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,5 @@
+# Italia IPTV Italia — https://italia-iptv.net
+User-agent: *
+Allow: /
+
+Sitemap: https://italia-iptv.net/sitemap.xml

@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+@theme {
+  /* Display face: Space Grotesk — geometric, technical, wide apertures. Body is
+     Inter, so the page reads as an interface rather than as printed matter. */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+  /* Daylight surfaces: white page, cool grey seams, near-black type. */
+  --color-canvas: #ffffff;
+  --color-canvas-alt: #f5f7fb;
+  --color-paper: #ffffff;
+  --color-ink: #0d1420;
+  --color-ink-soft: #5c6779;
+
+  /* Azzurro carries the interface; the tricolore is kept for the mark. */
+  --color-brand: #1f6bff;
+  --color-brand-deep: #114fd1;
+  --color-brand-soft: #e6eeff;
+  --color-brand-light: #4d8cff;
+
+  --color-italy-green: #00b463;
+  --color-italy-white: #ffffff;
+  --color-italy-red: #ef2b3f;
+
+  /*
+   * The components are written against the emerald and teal ramps. Both are
+   * redefined as azzurro, so every `bg-emerald-500 text-white` call site lands
+   * on the accent without being rewritten.
+   */
+  --color-emerald-50: #eef4ff;
+  --color-emerald-100: #dde8ff;
+  --color-emerald-200: #bcd2ff;
+  --color-emerald-300: #8fb4ff;
+  --color-emerald-400: #4d8cff;
+  --color-emerald-500: #1f6bff;
+  --color-emerald-600: #114fd1;
+  --color-emerald-700: #0d3fa6;
+  --color-emerald-800: #0b3382;
+  --color-emerald-900: #092763;
+
+  --color-teal-50: #eaf7fd;
+  --color-teal-100: #d2eefa;
+  --color-teal-200: #a5dcf4;
+  --color-teal-300: #6ac5ea;
+  --color-teal-400: #29a8e0;
+  --color-teal-500: #1c8ec4;
+  --color-teal-600: #16719e;
+  --color-teal-700: #125a7e;
+  --color-teal-800: #0e4462;
+  --color-teal-900: #0b3349;
+
+  /* Low end is surface, middle is type, top end stays dark for the footer and
+     the cinema band — which is how the components already use it. */
+  --color-slate-50: #f7f9fc;
+  --color-slate-100: #eef1f7;
+  --color-slate-200: #dfe4ee;
+  --color-slate-300: #c4ccdb;
+  --color-slate-400: #8e99ad;
+  --color-slate-500: #6f7b90;
+  --color-slate-600: #586377;
+  --color-slate-700: #3c4657;
+  --color-slate-800: #232c3d;
+  --color-slate-900: #121926;
+  --color-slate-950: #0a0f18;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color-scheme: light;
+    scroll-behavior: smooth;
+    background-color: var(--color-canvas);
+  }
+
+  /* Headings carry the display face by default so section titles need no extra class. */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Heavy rounded display type, as used for the hero wordmark and section titles. */
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+/* The terracotta marker-pen bar that sits behind a highlighted word. */
+@utility hl-pill {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  padding-inline: 0.35em;
+
+  color: var(--color-brand-deep);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0.1em -0.02em 0.08em;
+    background: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand) 30%, transparent);
+    border-radius: 0.35em;
+  }
+}
+
+/* Ambient tricolore wash for the dark surfaces: a green bloom entering from one
+   corner, a red one from the other, both faint enough to read as depth rather
+   than as colour. Painted as an overlay so it composites over the espresso. */
+@utility glow-azzurro {
+  background-image:
+    radial-gradient(
+      60% 80% at 15% 0%,
+      color-mix(in srgb, var(--color-brand) 30%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 75% at 85% 100%,
+      color-mix(in srgb, var(--color-teal-400) 22%, transparent),
+      transparent 70%
+    );
+}
+
+@utility glow-tricolore {
+  background-image:
+    radial-gradient(
+      70% 90% at 6% 4%,
+      color-mix(in srgb, var(--color-italy-green) 26%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      70% 90% at 94% 96%,
+      color-mix(in srgb, var(--color-italy-red) 24%, transparent),
+      transparent 68%
+    );
+}
+
+/* Same wash, dialled back for small surfaces like the floating bottom bar. */
+@utility glow-tricolore-soft {
+  background-image:
+    radial-gradient(
+      80% 140% at 2% 50%,
+      color-mix(in srgb, var(--color-italy-green) 20%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      80% 140% at 98% 50%,
+      color-mix(in srgb, var(--color-italy-red) 18%, transparent),
+      transparent 62%
+    );
+}
+
+/* Faint majolica lattice, the diamond grid off a hand-painted Italian tile.
+   Sits behind the pale sections and reads as texture, never as decoration. */
+@utility pattern-majolica {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 4%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* Tricolore bar: green | white | red in equal thirds. Used as the rule under
+   section labels, the strip on the navbar and footer, and the splash rule. */
+@utility tricolore {
+  background-image: linear-gradient(
+    to right,
+    var(--color-italy-green) 0 33.334%,
+    var(--color-italy-white) 33.334% 66.667%,
+    var(--color-italy-red) 66.667% 100%
+  );
+}
+
+/* Same flag, running top to bottom — for vertical spines and side accents. */
+@utility tricolore-v {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-italy-green) 0 33.334%,
+    var(--color-italy-white) 33.334% 66.667%,
+    var(--color-italy-red) 66.667% 100%
+  );
+}
+
+/* Thin outlined ring used as a decorative backdrop behind hero imagery. */
+@utility doodle-ring {
+  border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  border-radius: 9999px;
+}
+
+/* Oversized ghosted numeral ("01") bled into a section corner. */
+@utility ghost-numeral {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.72;
+  color: color-mix(in srgb, var(--color-ink) 7%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Vertical poster marquees in the hero side panel. The track is rendered twice,
+   so translating by -50% loops seamlessly. */
+@keyframes hero-scroll-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes hero-scroll-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+
+@utility hero-track-up {
+  animation: hero-scroll-up 48s linear infinite;
+}
+@utility hero-track-down {
+  animation: hero-scroll-down 56s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-track-up,
+  .hero-track-down {
+    animation: none;
+  }
+}
+
+/* ---- Splash intro ---- */
+@keyframes splash-mark-in {
+  from { opacity: 0; transform: scale(0.82) rotate(-10deg); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes splash-letter-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes splash-rule-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes splash-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Horizontal channel-logo walls. Track is duplicated, so -50% loops seamlessly. */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@utility marquee-left {
+  animation: marquee-left var(--marquee-duration, 60s) linear infinite;
+}
+@utility marquee-right {
+  animation: marquee-right var(--marquee-duration, 60s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left,
+  .marquee-right {
+    animation: none;
+  }
+}
+
+/* Hide the scrollbar on horizontal filter/carousel strips */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Slim scrollbar for panels that scroll inside the page */
+@utility scrollbar-slim {
+  scrollbar-width: thin;
+  scrollbar-color: #c4ccdb transparent;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c4ccdb;
+    border-radius: 9999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #8e99ad;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: #c4ccdb;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8e99ad;
+}
