@@ -9,7 +9,7 @@ import {
   getPlanPrice
 } from '../data/pricing';
 import { PlanTierId } from '../types';
-import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Crown } from 'lucide-react';
+import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Crown, Bitcoin } from 'lucide-react';
 import { CONTACT_LINK, orderLink } from '../data/contact';
 import { SectionHeading } from './SectionHeading';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -227,6 +227,20 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     <WhatsAppIcon className="w-4 h-4" />
                     <span>{isVip ? 'Diventa VIP' : 'Ordina Ora'}</span>
                   </a>
+
+                  {/* Crypto is a real reason people pick one provider over
+                      another, so it is said on the pack itself and not only in
+                      the payment row further down. */}
+                  <p
+                    className={`relative mt-3 flex items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-semibold ${
+                      isVip
+                        ? 'border-vip/25 bg-vip/8 text-vip-deep'
+                        : 'border-brand/25 bg-brand/8 text-brand-deep'
+                    }`}
+                  >
+                    <Bitcoin className="w-3.5 h-3.5" />
+                    <span>Paghi anche in crypto · Bitcoin, USDT, ETH</span>
+                  </p>
 
                   <div className={`relative mt-6 pt-5 border-t ${isVip ? 'border-vip/25' : 'border-ink/10'}`}>
                     {/* Tier chip + heading */}

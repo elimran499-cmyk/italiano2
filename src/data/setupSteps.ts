@@ -6,7 +6,7 @@ export const SETUP_STEPS: SetupStep[] = [
   {
     number: 1,
     title: 'Scegli il Tuo Pacchetto',
-    description: `Seleziona la durata che preferisci (${DURATION_SUMMARY}) e paga in sicurezza con carta, PayPal, Apple Pay o crypto.`,
+    description: `Seleziona la durata che preferisci (${DURATION_SUMMARY}) e paga in sicurezza con carta, PayPal, Apple Pay o in crypto (Bitcoin, USDT, ETH).`,
     iconName: 'ShoppingBag',
     detail: 'Nessun contratto — rinnovi solo se vuoi tu'
   },
