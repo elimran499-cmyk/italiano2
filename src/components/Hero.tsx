@@ -1,10 +1,11 @@
 import React from 'react';
-import { Play, Layers, CheckCircle2 } from 'lucide-react';
+import { Layers, CheckCircle2 } from 'lucide-react';
 import { MEDIA_ROWS } from '../data/media';
 import { CONTACT_LINK } from '../data/contact';
 import { CHANNEL_COUNT, VOD_COUNT } from '../data/stats';
 import { useFeaturedRotation } from '../hooks/useFeaturedRotation';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { LogoMark } from './Logo';
 
 interface HeroProps {
   onOpenCheckoutModal: () => void;
@@ -33,9 +34,6 @@ const GUARANTEES = [
   'Attivo in 5 minuti'
 ];
 
-const metaOf = (item: (typeof FEATURED)[number]) =>
-  [item.year, item.genre, item.quality].filter(Boolean).join(' • ');
-
 /**
  * Cinematic hero, built to the streaming-app reference: full-bleed key art with
  * the title set large over it, a play affordance, and the catalogue rail along
@@ -45,7 +43,6 @@ const metaOf = (item: (typeof FEATURED)[number]) =>
  */
 export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => {
   const { index, armed } = useFeaturedRotation(FEATURED.length);
-  const active = FEATURED[index];
 
   return (
     <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden bg-black">
@@ -64,9 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => {
                 alt=""
                 decoding="async"
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className={`h-full w-full object-cover sm:scale-110 sm:blur-2xl ${
-                  i === index ? 'hero-kenburns' : ''
-                }`}
+                className={`h-full w-full object-cover ${i === index ? 'hero-kenburns' : ''}`}
                 style={{ objectPosition: '50% 28%', filter: 'brightness(1.1) saturate(1.05)' }}
               />
             )}
@@ -77,77 +72,36 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => {
       {/* Grades: light enough to keep the still bright, heavy enough to hold type */}
       <div className="absolute inset-x-0 top-0 h-[46%] bg-gradient-to-b from-black/90 via-black/45 to-transparent sm:h-32 sm:from-black/80" />
       <div className="absolute inset-x-0 bottom-0 h-[52%] bg-gradient-to-t from-black via-black/88 to-transparent" />
-      <div className="absolute inset-0 hidden sm:block bg-gradient-to-r from-black via-black/75 to-transparent" />
+      {/* A centred composition needs an even grade, not a one-sided one */}
+      <div className="absolute inset-0 bg-black/45 sm:bg-black/50" />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col px-5 pt-20 pb-24 sm:px-6 sm:pt-32 sm:pb-10 lg:px-8">
-        <div className="sm:flex sm:items-start sm:justify-between sm:gap-10">
-          {/* Title block */}
-          <div className="sm:max-w-2xl">
-            <p
-              key={active.id}
-              className="hero-title-in font-display text-[2.1rem] font-bold uppercase leading-[0.95] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl"
-              style={{ textShadow: '0 2px 18px rgba(0,0,0,0.85), 0 1px 4px rgba(0,0,0,0.6)' }}
-            >
-              {active.title}
-            </p>
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col px-5 pt-24 pb-10 sm:px-6 sm:pt-28 lg:px-8">
+        {/* The name holds the centre of the frame; the artwork behind it rotates */}
+        <div className="flex flex-1 flex-col items-center justify-center text-center">
+          <LogoMark className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20" />
 
-            <p className="mt-2.5 text-[12px] font-medium text-white/60 sm:mt-4 sm:text-sm">
-              {metaOf(active)}
-            </p>
+          <h1
+            className="hero-title-in mt-5 font-display font-bold leading-[0.9] tracking-[-0.05em] text-white text-[3.25rem] sm:text-7xl lg:text-[6rem]"
+            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5)' }}
+          >
+            italia<span className="text-brand-light">iptv</span>
+          </h1>
 
-            <div className="mt-3.5 h-[3px] w-9 rounded-full bg-brand sm:mt-5 sm:w-12" />
+          <p className="mt-4 max-w-xl font-display text-lg sm:text-2xl lg:text-3xl font-medium tracking-[-0.02em] text-white/90">
+            Tutta la TV italiana, su ogni schermo
+          </p>
 
-            <div className="mt-6 flex items-center gap-4 sm:mt-7">
-              <button
-                type="button"
-                onClick={onOpenCheckoutModal}
-                aria-label="Vedi i pacchetti"
-                className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border border-white/70 transition-colors active:bg-white/15 hover:bg-white/10 sm:h-14 sm:w-14"
-              >
-                <Play className="h-[18px] w-[18px] translate-x-[2px] fill-white text-white sm:h-5 sm:w-5" />
-              </button>
+          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-light animate-pulse" />
+            {CHANNEL_COUNT} canali · {VOD_COUNT} film e serie
+          </span>
 
-              <button
-                type="button"
-                onClick={onOpenCheckoutModal}
-                id="hero-btn-pacchetti"
-                className="glass-brand hidden sm:inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-bold text-white hover:brightness-110 transition-all"
-              >
-                <Layers className="h-4 w-4" />
-                Tutti i pacchetti
-              </button>
-            </div>
-
-            <div className="mt-7 hidden sm:flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-white/65">
-              {GUARANTEES.map((item) => (
-                <span key={item} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-brand-light" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* The sharp still, for the wide frame the blurred fill sits behind */}
-          <div className="hidden sm:block shrink-0">
-            <img
-              key={active.id}
-              src={active.poster}
-              alt=""
-              decoding="async"
-              className="hero-title-in h-[300px] w-[200px] rounded-2xl object-cover shadow-2xl shadow-black/70 ring-1 ring-white/15 lg:h-[380px] lg:w-[254px]"
-            />
-          </div>
-        </div>
-
-        {/* Foot */}
-        <div className="mt-auto">
-          {/* Phone: the two ways in */}
-          <div className="sm:hidden">
+          <div className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <button
               type="button"
               onClick={onOpenCheckoutModal}
-              className="glass-brand flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-bold text-white"
+              id="hero-btn-pacchetti"
+              className="glass-brand flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-bold text-white hover:brightness-110 transition-all active:scale-[0.98]"
             >
               <Layers className="h-4 w-4" />
               Vedi i pacchetti
@@ -157,46 +111,64 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => {
               href={CONTACT_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/12 py-4 text-sm font-bold text-white backdrop-blur-md transition-colors active:bg-white/20"
+              id="hero-btn-contatti"
+              className="flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/12 px-7 py-4 text-sm font-bold text-white backdrop-blur-md transition-colors hover:bg-white/20 active:bg-white/20"
             >
               <WhatsAppIcon className="h-4 w-4" />
               Ordina su WhatsApp
             </a>
           </div>
 
-          {/* Wide: collection label, progress markers, poster rail */}
-          <div className="hidden sm:block">
-            <div className="mb-3 flex items-end justify-between">
-              <p className="text-sm font-bold text-white drop-shadow">
-                Dalla libreria Italia IPTV
-              </p>
-              <div className="flex items-center gap-2">
-                {FEATURED.map((item, i) => (
-                  <span
-                    key={item.id}
-                    className={`h-[3px] rounded-full transition-all duration-500 ${
-                      i === index ? 'w-8 bg-brand' : 'w-4 bg-white/30'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
+          <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-white/65">
+            {GUARANTEES.map((item) => (
+              <li key={item} className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-brand-light" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            <div className="flex gap-3 overflow-hidden">
-              {RAIL.map((item) => (
-                <img
+        {/* Foot: which title is on screen, and the rail it comes from */}
+        <div className="mt-auto hidden sm:block">
+          <div className="mb-3 flex items-end justify-between">
+            <p className="text-sm font-bold text-white/90 drop-shadow">
+              Dalla libreria Italia IPTV
+            </p>
+            <div className="flex items-center gap-2">
+              {FEATURED.map((item, i) => (
+                <span
                   key={item.id}
-                  src={item.poster}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className="h-[132px] w-[88px] shrink-0 rounded-lg object-cover shadow-xl shadow-black/60 ring-1 ring-white/10 transition-transform duration-300 hover:scale-105"
+                  className={`h-[3px] rounded-full transition-all duration-500 ${
+                    i === index ? 'w-8 bg-brand-light' : 'w-4 bg-white/30'
+                  }`}
                 />
               ))}
             </div>
           </div>
+
+          <div className="flex gap-3 overflow-hidden [mask-image:linear-gradient(to_right,#000_82%,transparent)]">
+            {RAIL.map((item) => (
+              <img
+                key={item.id}
+                src={item.poster}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="h-[120px] w-[80px] shrink-0 rounded-lg object-cover shadow-xl shadow-black/60 ring-1 ring-white/10 transition-transform duration-300 hover:scale-105 lg:h-[132px] lg:w-[88px]"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Phone: a hint that the page continues */}
+        <div className="mt-auto flex justify-center sm:hidden">
+          <span className="h-9 w-5 rounded-full border border-white/30 flex items-start justify-center pt-1.5">
+            <span className="h-1.5 w-1 rounded-full bg-white/70" />
+          </span>
         </div>
       </div>
+
     </section>
   );
 };
