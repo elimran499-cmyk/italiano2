@@ -32,6 +32,12 @@ export interface OrderDetails {
  * Link d'ordine con tutte le opzioni scelte nel messaggio, così l'assistenza sa
  * subito quale pacchetto, quale durata e quanti schermi.
  */
+const orderLines = ({ packageName, duration, devices, price }: OrderDetails): string[] => [
+  `Durata: ${duration}`,
+  `Schermi: ${devices} ${devices === 1 ? 'dispositivo' : 'dispositivi'}`,
+  `Prezzo: ${price}`
+];
+
 export const orderLink = ({ packageName, duration, devices, price }: OrderDetails): string =>
   whatsappLink(
     [
@@ -40,5 +46,20 @@ export const orderLink = ({ packageName, duration, devices, price }: OrderDetail
       `Durata: ${duration}`,
       `Schermi: ${devices} ${devices === 1 ? 'dispositivo' : 'dispositivi'}`,
       `Prezzo: ${price}`
+    ].join('\n')
+  );
+
+/**
+ * Come l'ordine normale, ma la chat si apre già chiedendo di pagare in crypto,
+ * così l'assistenza manda subito l'indirizzo giusto invece di dover chiedere.
+ */
+export const cryptoOrderLink = (details: OrderDetails): string =>
+  whatsappLink(
+    [
+      `Ciao Italia IPTV, vorrei ordinare il ${details.packageName} e pagare in crypto.`,
+      '',
+      ...orderLines(details),
+      '',
+      'Posso pagare con Bitcoin, USDT o ETH?'
     ].join('\n')
   );

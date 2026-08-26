@@ -9,8 +9,8 @@ import {
   getPlanPrice
 } from '../data/pricing';
 import { PlanTierId } from '../types';
-import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Crown, Bitcoin } from 'lucide-react';
-import { CONTACT_LINK, orderLink } from '../data/contact';
+import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Crown, Bitcoin, ArrowRight } from 'lucide-react';
+import { CONTACT_LINK, cryptoOrderLink, orderLink } from '../data/contact';
 import { SectionHeading } from './SectionHeading';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { RollingPrice } from './RollingPrice';
@@ -231,16 +231,26 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                   {/* Crypto is a real reason people pick one provider over
                       another, so it is said on the pack itself and not only in
                       the payment row further down. */}
-                  <p
-                    className={`relative mt-3 flex items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-semibold ${
+                  <a
+                    data-cta="order"
+                    href={cryptoOrderLink({
+                      packageName: tier.name,
+                      duration: duration.label,
+                      devices,
+                      price: formatEuro(price)
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group/crypto relative mt-3 flex items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-colors ${
                       isVip
-                        ? 'border-vip/25 bg-vip/8 text-vip-deep'
-                        : 'border-brand/25 bg-brand/8 text-brand-deep'
+                        ? 'border-vip/25 bg-vip/8 text-vip-deep hover:bg-vip/15 hover:border-vip/40'
+                        : 'border-brand/25 bg-brand/8 text-brand-deep hover:bg-brand/15 hover:border-brand/40'
                     }`}
                   >
-                    <Bitcoin className="w-3.5 h-3.5" />
+                    <Bitcoin className="w-3.5 h-3.5 shrink-0" />
                     <span>Paghi anche in crypto · Bitcoin, USDT, ETH</span>
-                  </p>
+                    <ArrowRight className="w-3 h-3 shrink-0 opacity-60 transition-transform group-hover/crypto:translate-x-0.5" />
+                  </a>
 
                   <div className={`relative mt-6 pt-5 border-t ${isVip ? 'border-vip/25' : 'border-ink/10'}`}>
                     {/* Tier chip + heading */}
