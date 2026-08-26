@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play, MessageCircle, Check } from 'lucide-react';
+import { LogoMark } from './Logo';
 import { MEDIA_ROWS } from '../data/media';
 import { CONTACT_LINK } from '../data/contact';
 import { CHANNEL_COUNT, VOD_COUNT } from '../data/stats';
@@ -31,29 +32,34 @@ const PROOF = ['Attivo in 5 minuti', 'Senza contratto', 'Fino a 4K e 60 fps'];
  * of the brand name, this one leads with the offer.
  */
 export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
-  <section className="relative overflow-hidden pt-28 pb-0 lg:pt-36">
+  <section className="relative flex flex-col overflow-hidden pt-20 pb-0 sm:pt-28 lg:pt-36">
     {/* Azzurro light thrown from behind the headline */}
     <span aria-hidden="true" className="glow-azzurro absolute inset-x-0 -top-40 h-[38rem] pointer-events-none" />
     <span aria-hidden="true" className="pattern-majolica absolute inset-0 pointer-events-none opacity-60" />
 
-    <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand/35 bg-brand/10 text-brand-light text-[12px] font-semibold tracking-wide">
+    <div className="relative order-last sm:order-first max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <LogoMark className="w-14 h-14 sm:w-16 sm:h-16 mx-auto" />
+
+      {/* The site's own name, set as the centrepiece */}
+      <h1 className="mt-5 font-display font-bold text-ink leading-[0.9] tracking-[-0.05em] text-[3.25rem] sm:text-7xl lg:text-[5.5rem]">
+        italia<span className="text-brand">iptv</span>
+      </h1>
+
+      <p className="mt-4 font-display text-lg sm:text-2xl lg:text-3xl font-medium tracking-[-0.02em] text-ink">
+        Tutta la TV italiana, <span className="hl-pill">su ogni schermo</span>
+      </p>
+
+      <span className="mt-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand/35 bg-brand/10 text-brand text-[12px] font-semibold tracking-wide">
         <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
         {CHANNEL_COUNT} canali · {VOD_COUNT} film e serie
       </span>
 
-      <h1 className="mt-7 font-display font-bold text-ink leading-[0.95] tracking-[-0.045em] text-[2.75rem] sm:text-6xl lg:text-[5.25rem]">
-        Tutta la TV italiana,
-        <br />
-        <span className="hl-pill">su ogni schermo</span>
-      </h1>
-
-      <p className="mt-6 mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft">
+      <p className="mt-5 mx-auto max-w-2xl text-[15px] sm:text-lg leading-relaxed text-ink-soft">
         Rai, Mediaset, Sky, DAZN e La7 in diretta, più una libreria on demand che si aggiorna ogni
         giorno. Nessuna parabola, nessun decoder — solo la tua connessione.
       </p>
 
-      <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+      <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
         <button
           onClick={onOpenCheckoutModal}
           id="hero-btn-pacchetti"
@@ -74,7 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
         </a>
       </div>
 
-      <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
+      <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
         {PROOF.map((item) => (
           <li key={item} className="flex items-center gap-2 text-[13px] font-medium text-ink-soft">
             <Check className="w-4 h-4 text-brand" strokeWidth={3} />
@@ -91,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
       constraint.
     */}
     <div
-      className="relative mt-12 sm:mt-16 lg:mt-20 space-y-3 sm:space-y-0 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]"
+      className="relative order-first sm:order-last mb-10 sm:mb-0 sm:mt-16 lg:mt-20 space-y-3 sm:space-y-0 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]"
       aria-hidden="true"
     >
       {ROWS.map((row, rowIndex) => (
@@ -129,8 +135,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
         </div>
       ))}
 
-      {/* The band sinks into the section below it */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-canvas to-transparent" />
+      {/* Leading the page on a phone the band fades downward into the name;
+          trailing it from sm up, it sinks into the section below. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-canvas to-transparent" />
     </div>
   </section>
 );
