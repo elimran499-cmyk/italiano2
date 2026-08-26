@@ -9,7 +9,7 @@ import {
   getPlanPrice
 } from '../data/pricing';
 import { PlanTierId } from '../types';
-import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Star } from 'lucide-react';
+import { Check, Sparkles, ShieldCheck, Lock, CreditCard, Monitor, Crown } from 'lucide-react';
 import { CONTACT_LINK, orderLink } from '../data/contact';
 import { SectionHeading } from './SectionHeading';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -67,13 +67,15 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                       layoutId="tier-pill"
                       transition={pill}
                       className={`absolute inset-0 rounded-xl shadow-md ${
-                        id === 'premium' ? 'bg-brand' : 'bg-ink'
+                        id === 'premium'
+                          ? 'bg-gradient-to-r from-brand to-teal-400 shadow-brand/30'
+                          : 'bg-ink'
                       }`}
                     />
                   )}
                   <span className="relative flex items-center gap-2">
                     {id === 'premium' && (
-                      <Star className={`w-4 h-4 ${isActive ? 'fill-white text-white' : ''}`} />
+                      <Crown className={`w-4 h-4 ${isActive ? 'text-white' : ''}`} />
                     )}
                     <span>{id === 'premium' ? 'Premium VIP' : 'Base'}</span>
                   </span>
@@ -128,118 +130,122 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
             return (
               <div
                 key={duration.id}
-                className={`relative rounded-xl p-6 sm:p-7 flex flex-col transition-colors duration-300 ${
+                className={`relative flex flex-col rounded-2xl transition-all duration-300 ${
                   isVip
-                    ? isDeal
-                      ? 'bg-brand-soft border-2 border-brand shadow-2xl shadow-brand/20'
-                      : 'bg-brand-soft/60 border border-brand/30 shadow-lg shadow-brand/10'
+                    ? `p-[1.5px] bg-gradient-to-br from-brand via-teal-400 to-brand-deep ${
+                        isDeal
+                          ? 'shadow-2xl shadow-brand/30'
+                          : 'shadow-lg shadow-brand/15 hover:shadow-xl hover:shadow-brand/25'
+                      }`
                     : isDeal
-                      ? 'bg-paper border-2 border-brand shadow-2xl shadow-brand/20'
-                      : 'bg-paper border border-ink/10 shadow-sm hover:shadow-md hover:border-ink/25'
+                      ? 'bg-canvas border-2 border-brand shadow-2xl shadow-brand/15'
+                      : 'bg-canvas border border-ink/10 shadow-sm hover:shadow-md hover:border-ink/25'
                 }`}
               >
-                {isDeal && (
-                  <span
-                    aria-hidden="true"
-                    className="tricolore absolute inset-x-0 top-0 h-1 rounded-t-xl"
-                  />
-                )}
-
                 {/* Deal badge */}
                 {isDeal && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand text-white text-[11px] font-display font-extrabold px-4 py-1.5 rounded-full shadow-md uppercase tracking-wider whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-brand to-teal-400 text-white text-[11px] font-display font-bold px-4 py-1.5 rounded-full shadow-lg shadow-brand/25 uppercase tracking-[0.12em] whitespace-nowrap">
                     {duration.note} · {duration.badge}
                   </div>
                 )}
 
-                {/* Durata */}
-                <p
-                  className={`text-center text-xs sm:text-[13px] font-display font-extrabold uppercase tracking-[0.16em] mt-1 ${
-                    'text-brand-deep'
+                {/*
+                  On VIP the card is a gradient edge with a white face inset
+                  inside it — the tier reads as a different object rather than
+                  the same card in another colour.
+                */}
+                <div
+                  className={`relative flex flex-1 flex-col overflow-hidden p-6 sm:p-7 ${
+                    isVip ? 'rounded-[calc(1rem-1.5px)] bg-canvas' : 'rounded-2xl'
                   }`}
                 >
-                  {duration.label}
-                </p>
+                  {isVip && (
+                    <>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand/8 to-transparent"
+                      />
+                      <span className="absolute top-5 right-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand to-teal-400 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-sm">
+                        <Crown className="w-3 h-3" />
+                        VIP
+                      </span>
+                    </>
+                  )}
 
-                {/* Price — remounts on every tier / device change so it animates in */}
-                <p
-                  className={`mt-3 text-center font-display text-4xl sm:text-[2.75rem] font-extrabold leading-none ${
-                    'text-ink'
-                  }`}
-                >
-                  <RollingPrice value={formatEuro(price)} />
-                </p>
+                  {/* Durata */}
+                  <p className="relative text-center text-xs sm:text-[13px] font-display font-bold uppercase tracking-[0.16em] mt-1 text-brand-deep">
+                    {duration.label}
+                  </p>
 
-                <p
-                  className={`mt-2 text-center text-[11px] sm:text-xs font-semibold ${
-                    'text-ink-soft'
-                  }`}
-                >
-                  ≈ <RollingPrice value={formatEuro(perMonth)} className="mx-0.5" /> al mese
-                </p>
+                  {/* Price — the digits roll on every tier and device change */}
+                  <p
+                    className={`relative mt-3 text-center font-display text-4xl sm:text-[2.75rem] font-bold leading-none ${
+                      isVip
+                        ? 'bg-gradient-to-br from-brand via-brand to-teal-500 bg-clip-text text-transparent'
+                        : 'text-ink'
+                    }`}
+                  >
+                    <RollingPrice value={formatEuro(price)} />
+                  </p>
 
-                <p
-                  className={`mt-2.5 text-center text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1.5 ${
-                    'text-ink-soft'
-                  }`}
-                >
-                  <Monitor className="w-3.5 h-3.5" />
-                  {deviceLabel} incluso
-                </p>
+                  <p className="relative mt-2 text-center text-[11px] sm:text-xs font-semibold text-ink-soft">
+                    ≈ <RollingPrice value={formatEuro(perMonth)} className="mx-0.5" /> al mese
+                  </p>
 
-                {/* Order — opens WhatsApp with the chosen options prefilled */}
-                <a
-                  data-cta="order"
-                  href={orderLink({
-                    packageName: tier.name,
-                    duration: duration.label,
-                    devices,
-                    price: formatEuro(price)
-                  })}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`mt-5 w-full py-3.5 rounded-full font-display font-extrabold text-sm transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
-                    isDeal
-                      ? 'bg-brand hover:bg-brand-deep text-white shadow-lg'
-                      : isVip
-                        ? 'bg-brand hover:bg-brand-deep text-white shadow-lg shadow-brand/25'
-                        : 'bg-ink hover:bg-ink/90 text-white'
-                  }`}
-                >
-                  <WhatsAppIcon className="w-4 h-4" />
-                  <span>{isVip ? 'Diventa VIP Ora' : 'Ordina Ora'}</span>
-                </a>
+                  <p className="relative mt-2.5 text-center text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1.5 text-ink-soft">
+                    <Monitor className="w-3.5 h-3.5" />
+                    {deviceLabel} incluso
+                  </p>
 
-                <div className={`mt-6 pt-5 border-t ${isVip ? 'border-brand/25' : 'border-ink/10'}`}>
-                  {/* Tier chip + heading */}
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full shrink-0 ${
-                        isVip ? 'bg-brand text-white' : 'bg-ink/8 text-ink-soft'
-                      }`}
-                    >
-                      {tier.label}
-                    </span>
-                    <h3
-                      className={`font-display text-[13px] sm:text-sm font-extrabold ${
-                        isVip ? 'text-white' : 'text-ink'
-                      }`}
-                    >
-                      Cosa include il {tier.name}?
-                    </h3>
-                  </div>
+                  {/* Order — opens WhatsApp with the chosen options prefilled */}
+                  <a
+                    data-cta="order"
+                    href={orderLink({
+                      packageName: tier.name,
+                      duration: duration.label,
+                      devices,
+                      price: formatEuro(price)
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative mt-5 w-full py-3.5 rounded-full font-display font-bold text-sm transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
+                      isVip
+                        ? 'bg-gradient-to-r from-brand to-teal-400 text-white shadow-lg shadow-brand/30'
+                        : isDeal
+                          ? 'bg-brand hover:bg-brand-deep text-white shadow-lg'
+                          : 'bg-ink hover:bg-ink/90 text-white'
+                    }`}
+                  >
+                    <WhatsAppIcon className="w-4 h-4" />
+                    <span>{isVip ? 'Diventa VIP' : 'Ordina Ora'}</span>
+                  </a>
 
-                  {/* Features — the list swaps wholesale when the tier changes */}
-                  <ul
-                      className={`mt-3.5 space-y-2 text-xs sm:text-[13px] font-medium ${
-                        'text-ink'
-                      }`}
-                    >
+                  <div className={`relative mt-6 pt-5 border-t ${isVip ? 'border-brand/25' : 'border-ink/10'}`}>
+                    {/* Tier chip + heading */}
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full shrink-0 ${
+                          isVip
+                            ? 'bg-gradient-to-r from-brand to-teal-400 text-white'
+                            : 'bg-ink/8 text-ink-soft'
+                        }`}
+                      >
+                        {tier.label}
+                      </span>
+                      <h3 className="font-display text-[13px] sm:text-sm font-bold text-ink">
+                        Cosa include il {tier.name}?
+                      </h3>
+                    </div>
+
+                    {/* Features */}
+                    <ul className="mt-3.5 space-y-2 text-xs sm:text-[13px] font-medium text-ink">
                       {tier.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2.5">
                           <span
                             className={`w-4.5 h-4.5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                              isVip ? 'bg-brand text-white' : 'bg-ink/8 text-ink-soft'
+                              isVip
+                                ? 'bg-gradient-to-br from-brand to-teal-400 text-white'
+                                : 'bg-ink/8 text-ink-soft'
                             }`}
                           >
                             <Check className="w-3 h-3 stroke-[3]" />
@@ -247,16 +253,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                           <span>{feature}</span>
                         </li>
                       ))}
-                  </ul>
-                </div>
+                    </ul>
+                  </div>
 
-                <div
-                  className={`mt-5 text-center text-[11px] font-semibold flex items-center justify-center gap-1 ${
-                    'text-ink-soft'
-                  }`}
-                >
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Non ti convince? Rimborso entro 7 giorni</span>
+                  <div className="relative mt-5 text-center text-[11px] font-semibold flex items-center justify-center gap-1 text-ink-soft">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Non ti convince? Rimborso entro 7 giorni</span>
+                  </div>
                 </div>
               </div>
             );
