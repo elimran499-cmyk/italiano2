@@ -25,10 +25,10 @@ export const SpeedCheckWidget: React.FC<SpeedCheckWidgetProps> = ({ onOpenChecko
         <div className="bg-gradient-to-br from-brand to-brand-deep text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
           
           {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand/100/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand/100/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
               <Gauge className="w-3.5 h-3.5 text-emerald-400" />
               <span>VERIFICA GRATUITA DI COMPATIBILITÀ</span>
             </div>
@@ -82,11 +82,11 @@ export const SpeedCheckWidget: React.FC<SpeedCheckWidgetProps> = ({ onOpenChecko
               <button
                 onClick={handleRunCheck}
                 disabled={isChecking}
-                className="px-8 py-3.5 bg-brand/100 hover:bg-emerald-400 text-white font-black text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mx-auto"
+                className="glass px-8 py-3.5 text-ink font-bold text-sm rounded-full hover:brightness-[0.98] transition-all flex items-center justify-center gap-2 mx-auto"
               >
                 {isChecking ? (
                   <>
-                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    <span className="w-4 h-4 border-2 border-ink border-t-transparent rounded-full animate-spin"></span>
                     <span>Analisi della rete in corso...</span>
                   </>
                 ) : (
@@ -107,7 +107,7 @@ export const SpeedCheckWidget: React.FC<SpeedCheckWidgetProps> = ({ onOpenChecko
                 </p>
                 <button
                   onClick={onOpenCheckoutModal}
-                  className="w-full py-3 bg-brand/100 hover:bg-emerald-400 text-white font-black text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+                  className="glass w-full py-3 text-ink font-bold text-sm rounded-full hover:brightness-[0.98] transition-all flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Vedi i Pacchetti</span>

@@ -28,7 +28,7 @@ const MediaCard: React.FC<{ item: MediaItem }> = ({ item }) => (
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
 
       {item.badge && (
-        <span className="absolute top-2 left-2 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-brand/100 text-white shadow-sm">
+        <span className="absolute top-2 left-2 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-brand text-white shadow-sm">
           {item.badge}
         </span>
       )}
@@ -39,7 +39,7 @@ const MediaCard: React.FC<{ item: MediaItem }> = ({ item }) => (
 
       {/* Hover play affordance */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
-        <span className="w-12 h-12 rounded-full bg-brand/100 flex items-center justify-center shadow-xl">
+        <span className="w-12 h-12 rounded-full bg-brand flex items-center justify-center shadow-xl">
           <Play className="w-5 h-5 text-white fill-white ml-0.5" />
         </span>
       </div>
@@ -193,8 +193,8 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
               onClick={() => setFilter(option.id)}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 filter === option.id
-                  ? 'bg-brand/100 text-white shadow-md shadow-emerald-500/20'
-                  : 'bg-white/5 text-ink-soft border border-white/10 hover:bg-white/10 hover:text-white'
+                  ? 'bg-brand text-white shadow-md shadow-brand/25'
+                  : 'bg-canvas text-ink-soft border border-ink/12 hover:border-ink/30 hover:text-ink'
               }`}
             >
               {option.label}
@@ -217,7 +217,7 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
 
         {/* Value props */}
         <div className="mt-9 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
+          <div className="bg-ink/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
             <Subtitles className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-ink text-sm">Audio e Sottotitoli in Italiano</h4>
@@ -226,7 +226,7 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
               </p>
             </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
+          <div className="bg-ink/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
             <Download className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-ink text-sm">Riproduzione Immediata</h4>
@@ -235,7 +235,7 @@ export const FilmsSeries: React.FC<FilmsSeriesProps> = ({ onOpenCheckoutModal })
               </p>
             </div>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
+          <div className="bg-ink/5 border border-white/10 rounded-lg p-5 flex items-start gap-3">
             <Sparkles className="w-5 h-5 text-brand shrink-0 mt-0.5" />
             <div>
               <h4 className="font-bold text-ink text-sm">Aggiornato Ogni Settimana</h4>

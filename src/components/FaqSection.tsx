@@ -62,7 +62,7 @@ export const FaqSection: React.FC = () => {
             href={CONTACT_LINK}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand/100 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+            className="glass-brand inline-flex items-center gap-2 px-5 py-2.5 text-white font-bold text-xs rounded-full hover:brightness-110 transition-all"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Fai la Tua Domanda su WhatsApp (24/7)</span>

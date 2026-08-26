@@ -218,9 +218,9 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     rel="noopener noreferrer"
                     className={`relative mt-5 w-full py-3.5 rounded-full font-display font-bold text-sm transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
                       isVip
-                        ? 'bg-gradient-to-r from-vip to-vip-accent text-white shadow-lg shadow-vip/35'
+                        ? 'glass-vip text-white hover:brightness-110'
                         : isDeal
-                          ? 'bg-brand hover:bg-brand-deep text-white shadow-lg'
+                          ? 'glass-brand text-white hover:brightness-110'
                           : 'bg-ink hover:bg-ink/90 text-white'
                     }`}
                   >
@@ -282,7 +282,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
 
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <div className="px-4 py-2.5 bg-paper rounded-xl border border-ink/10 shadow-2xs flex items-center gap-2 font-black text-ink text-xs sm:text-sm">
-              <span className="w-3 h-3 rounded-full bg-brand/100" />
+              <span className="w-3 h-3 rounded-full bg-brand" />
               <span>PayPal</span>
             </div>
             <div className="px-4 py-2.5 bg-paper rounded-xl border border-ink/10 shadow-2xs flex items-center gap-2 font-bold text-ink text-xs sm:text-sm">

@@ -16,7 +16,7 @@ export const WhatsAppFloating: React.FC = () => {
 
   // Lifted on phones so it clears the floating bottom navigation.
   return (
-    <div className="fixed bottom-24 lg:bottom-5 right-5 z-40 flex flex-col items-end space-y-2">
+    <div className="hidden lg:flex fixed bottom-5 right-5 z-40 flex-col items-end space-y-2">
       {/* Expanded WhatsApp Widget Box */}
       {isOpen && (
         <div className="bg-paper rounded-3xl shadow-2xl border border-ink/10 p-5 w-80 sm:w-88 animate-fade-in text-left relative space-y-3 mb-2">
@@ -32,7 +32,7 @@ export const WhatsAppFloating: React.FC = () => {
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-ink/8 pb-3">
             <div className="relative">
-              <div className="w-10 h-10 rounded-full bg-brand/100 text-white flex items-center justify-center font-bold text-lg">
+              <div className="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold text-lg">
                 S
               </div>
               <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white animate-pulse"></span>
@@ -40,7 +40,7 @@ export const WhatsAppFloating: React.FC = () => {
             <div>
               <div className="font-black text-ink text-sm">Italia IPTV Support</div>
               <div className="text-[11px] font-bold text-emerald-600 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand/100"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-brand"></span>
                 Online • Risponde entro 2 min
               </div>
             </div>
@@ -65,7 +65,7 @@ export const WhatsAppFloating: React.FC = () => {
             />
             <button
               type="submit"
-              className="w-full py-2.5 bg-brand/100 hover:bg-emerald-600 text-white font-extrabold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1.5"
+              className="glass-brand w-full py-2.5 text-white font-bold text-xs rounded-full hover:brightness-110 transition-all flex items-center justify-center gap-1.5"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Avvia la Chat WhatsApp</span>
@@ -78,7 +78,7 @@ export const WhatsAppFloating: React.FC = () => {
       {/* Floating Main Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative group p-4 bg-brand/100 hover:bg-emerald-600 text-white rounded-full shadow-xl shadow-emerald-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center"
+        className="relative group p-4 bg-brand hover:bg-emerald-600 text-white rounded-full shadow-xl shadow-emerald-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center"
         aria-label="WhatsApp Support Chat"
         id="btn-whatsapp-floating"
       >

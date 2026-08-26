@@ -70,7 +70,7 @@ export const Features: React.FC = () => {
                 />
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-lg bg-brand/15 text-brand-deep flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-lg bg-brand/15 text-brand-deep flex items-center justify-center group-hover:bg-brand group-hover:text-ink transition-colors duration-300">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-brand/10 text-brand-deep border border-brand/25">

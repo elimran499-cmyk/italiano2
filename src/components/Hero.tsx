@@ -51,7 +51,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
         <button
           onClick={onOpenCheckoutModal}
           id="hero-btn-pacchetti"
-          className="group px-7 py-4 rounded-full bg-brand hover:bg-brand-deep text-white font-bold text-[15px] shadow-xl shadow-brand/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2.5"
+          className="glass-brand group px-7 py-4 rounded-full text-white font-bold text-[15px] hover:brightness-110 transition-all active:scale-[0.98] flex items-center justify-center gap-2.5"
         >
           <Play className="w-4 h-4 fill-white" />
           <span>Vedi i pacchetti</span>
@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCheckoutModal }) => (
           target="_blank"
           rel="noopener noreferrer"
           id="hero-btn-contatti"
-          className="px-7 py-4 rounded-full border border-ink/15 hover:border-ink/30 hover:bg-ink/5 text-ink font-bold text-[15px] transition-all flex items-center justify-center gap-2.5"
+          className="glass px-7 py-4 rounded-full text-ink font-bold text-[15px] hover:brightness-[0.98] transition-all flex items-center justify-center gap-2.5"
         >
           <MessageCircle className="w-4 h-4" />
           <span>Parla con noi</span>

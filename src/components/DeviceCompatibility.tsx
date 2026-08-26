@@ -65,7 +65,7 @@ export const DeviceCompatibility: React.FC = () => {
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
-                  isActive ? 'bg-brand/100 text-white' : 'bg-ink/8 text-ink-soft'
+                  isActive ? 'bg-brand text-white' : 'bg-ink/8 text-ink-soft'
                 }`}>
                   <Icon className="w-5 h-5" />
                 </div>
@@ -108,7 +108,7 @@ export const DeviceCompatibility: React.FC = () => {
           </div>
 
           <div className="w-full md:w-auto shrink-0 bg-brand/10 p-6 rounded-lg border border-brand/25 text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-brand/100 text-white flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-brand text-white flex items-center justify-center mx-auto shadow-md">
               <Download className="w-6 h-6" />
             </div>
             <div>
@@ -119,7 +119,7 @@ export const DeviceCompatibility: React.FC = () => {
               href={whatsappLink('Ciao Italia IPTV, ho bisogno di aiuto per l\'installazione.')}
               target="_blank"
               rel="noreferrer"
-              className="inline-block w-full py-2.5 px-4 bg-brand/100 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-xs transition-colors"
+              className="glass-brand inline-block w-full py-2.5 px-4 text-white font-bold text-xs rounded-full hover:brightness-110 transition-all"
             >
               Assistenza Installazione su WhatsApp
             </a>

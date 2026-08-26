@@ -46,7 +46,7 @@ export const SetupSteps: React.FC<SetupStepsProps> = ({ onOpenCheckoutModal }) =
                   className="absolute inset-x-0 top-0 h-[3px] bg-brand origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
                 />
                 {/* Large Number Badge */}
-                <div className="absolute top-6 right-6 w-12 h-12 rounded-lg bg-brand/15 text-brand-deep font-display font-extrabold text-xl flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-colors duration-300">
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-lg bg-brand/15 text-brand-deep font-display font-extrabold text-xl flex items-center justify-center group-hover:bg-brand group-hover:text-ink transition-colors duration-300">
                   0{step.number}
                 </div>
 
@@ -77,7 +77,7 @@ export const SetupSteps: React.FC<SetupStepsProps> = ({ onOpenCheckoutModal }) =
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={onOpenCheckoutModal}
-            className="px-8 py-4 bg-ink hover:bg-ink/90 text-white font-display font-extrabold text-sm rounded-full shadow-lg shadow-ink/20 transition-all inline-flex items-center gap-2"
+            className="glass-brand px-8 py-4 text-white font-display font-bold text-sm rounded-full hover:brightness-110 transition-all inline-flex items-center gap-2"
           >
             <span>Scegli Subito il Tuo Pacchetto</span>
             <ArrowRight className="w-4 h-4" />
@@ -86,7 +86,7 @@ export const SetupSteps: React.FC<SetupStepsProps> = ({ onOpenCheckoutModal }) =
             href={CONTACT_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 bg-brand hover:bg-brand-deep text-white font-display font-extrabold text-sm rounded-full transition-all inline-flex items-center gap-2"
+            className="glass px-8 py-4 text-ink font-display font-bold text-sm rounded-full hover:brightness-[0.98] transition-all inline-flex items-center gap-2"
           >
             <span>Ti Serve Aiuto? Contattaci</span>
           </a>

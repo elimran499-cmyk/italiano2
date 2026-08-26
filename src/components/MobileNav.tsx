@@ -1,90 +1,99 @@
 import React, { useEffect, useState } from 'react';
-import { Home, Tv, Film, Tag, MessageCircle } from 'lucide-react';
+import { Menu, X, Tv, Film, Tag, Sparkles, HelpCircle, BookOpen } from 'lucide-react';
 import { CONTACT_LINK } from '../data/contact';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 /**
- * Navigazione flottante in basso per telefoni e tablet, al posto del menu a
- * tendina. Le sezioni sono seguite allo scroll, così la pillola attiva segue
- * la pagina.
+ * The phone menu: a single floating button that opens a stack of frosted pills
+ * above it, one per section, and turns into a close button while it is open.
+ * Replaces both the bottom tab bar and the full-screen overlay.
  */
 
-interface NavItem {
+interface Item {
   id: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const ITEMS: NavItem[] = [
-  { id: 'top', label: 'Home', icon: Home },
+const ITEMS: Item[] = [
   { id: 'canali', label: 'Canali', icon: Tv },
-  { id: 'film', label: 'Film', icon: Film },
-  { id: 'prezzi', label: 'Prezzi', icon: Tag }
+  { id: 'film', label: 'Film & Serie', icon: Film },
+  { id: 'prezzi', label: 'Prezzi', icon: Tag },
+  { id: 'vantaggi', label: 'Vantaggi', icon: Sparkles },
+  { id: 'guida', label: 'Guida', icon: BookOpen },
+  { id: 'faq', label: 'FAQ', icon: HelpCircle }
 ];
 
 export const MobileNav: React.FC = () => {
-  const [active, setActive] = useState<string>('top');
+  const [isOpen, setIsOpen] = useState(false);
 
+  // Escape closes it, the same as tapping the scrim.
   useEffect(() => {
-    const onScroll = () => {
-      // The section whose top has passed 45% of the viewport is the active one.
-      const line = window.scrollY + window.innerHeight * 0.45;
-      let current = 'top';
-      for (const item of ITEMS) {
-        if (item.id === 'top') continue;
-        const el = document.getElementById(item.id);
-        if (el && el.offsetTop <= line) current = item.id;
-      }
-      setActive(current);
+    if (!isOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false);
     };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen]);
 
   const go = (id: string) => {
-    if (id === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
+    setIsOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <nav
-      aria-label="Navigazione principale"
-      className="lg:hidden fixed bottom-4 inset-x-4 z-40 bg-canvas/85 backdrop-blur-xl border border-ink/10 rounded-full shadow-2xl shadow-ink/15 px-2 py-2 flex items-center justify-around overflow-hidden"
-    >
-      <span aria-hidden="true" className="glow-azzurro absolute inset-0 pointer-events-none" />
+    <>
+      {/* Scrim, so a tap anywhere closes the stack */}
+      {isOpen && (
+        <button
+          aria-label="Chiudi il menu"
+          onClick={() => setIsOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-ink/20 backdrop-blur-[2px]"
+        />
+      )}
 
-      {ITEMS.map((item) => {
-        const Icon = item.icon;
-        const isActive = active === item.id;
-        return (
-          <button
-            key={item.id}
-            onClick={() => go(item.id)}
-            aria-label={item.label}
-            aria-current={isActive ? 'true' : undefined}
-            className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-colors ${
-              isActive ? 'text-white bg-brand' : 'text-ink-soft hover:text-ink'
-            }`}
-          >
-            <Icon className="w-5 h-5" />
-          </button>
-        );
-      })}
+      <div className="lg:hidden fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2.5">
+        {isOpen && (
+          <>
+            {ITEMS.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => go(item.id)}
+                  style={{ animationDelay: `${index * 35}ms` }}
+                  className="menu-pill-in glass-ink flex items-center gap-2.5 rounded-2xl px-4 py-3 text-white text-sm font-semibold active:scale-95 transition-transform"
+                >
+                  <Icon className="w-4 h-4 opacity-80" />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
 
-      {/* Contact sits last, matching the top bar's WhatsApp action */}
-      <a
-        href={CONTACT_LINK}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contatto via WhatsApp"
-        className="relative flex items-center justify-center w-12 h-12 rounded-full text-ink-soft hover:text-ink transition-colors"
-      >
-        <MessageCircle className="w-5 h-5" />
-      </a>
-    </nav>
+            <a
+              href={CONTACT_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              style={{ animationDelay: `${ITEMS.length * 35}ms` }}
+              className="menu-pill-in glass-brand flex items-center gap-2.5 rounded-2xl px-4 py-3 text-white text-sm font-semibold active:scale-95 transition-transform"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
+              <span>WhatsApp</span>
+            </a>
+          </>
+        )}
+
+        <button
+          onClick={() => setIsOpen((open) => !open)}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? 'Chiudi il menu' : 'Apri il menu'}
+          className="glass-ink w-14 h-14 rounded-full grid place-items-center text-white active:scale-95 transition-transform"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+    </>
   );
 };

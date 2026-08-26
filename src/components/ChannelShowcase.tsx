@@ -175,7 +175,7 @@ export const ChannelShowcase: React.FC<ChannelShowcaseProps> = ({ onOpenCheckout
           </div>
           <button
             onClick={onOpenCheckoutModal}
-            className="relative px-6 py-3.5 bg-brand hover:bg-brand-deep text-white font-display font-extrabold text-sm rounded-full shadow-md transition-all shrink-0 flex items-center gap-2"
+            className="glass-brand relative px-6 py-3.5 text-white font-display font-bold text-sm rounded-full hover:brightness-110 transition-all shrink-0 flex items-center gap-2"
           >
             <Sparkles className="w-4 h-4" />
             <span>Vedi i Pacchetti</span>

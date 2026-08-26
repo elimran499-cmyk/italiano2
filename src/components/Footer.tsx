@@ -83,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
             <div className="pt-2 flex flex-col gap-2">
               <button
                 onClick={onOpenCheckoutModal}
-                className="w-full py-2.5 px-4 bg-brand/100 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-xs transition-colors text-center"
+                className="glass-brand w-full py-2.5 px-4 text-white font-bold text-xs rounded-full hover:brightness-110 transition-all text-center"
               >
                 Vedi i Pacchetti
               </button>
@@ -91,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckoutModal }) => {
                 href={CONTACT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-canvas hover:bg-ink/5 text-ink font-bold text-xs rounded-xl border border-ink/12 transition-colors text-center"
+                className="glass w-full py-2.5 px-4 text-ink font-bold text-xs rounded-full transition-all text-center"
               >
                 Contattaci su WhatsApp
               </a>
