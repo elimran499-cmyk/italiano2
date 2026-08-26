@@ -54,22 +54,43 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
             further down, so the tint is dark and the marks are light. Nothing
             about it changes on scroll.
           */}
-          <div className="sm:hidden flex items-center justify-between gap-1 rounded-full border border-white/20 bg-ink/45 px-2 py-1.5 shadow-lg shadow-ink/25 backdrop-blur-xl">
+          {/*
+            Phone bar. Over the hero it is one floating glass pill; once the
+            page moves the bar itself dissolves and its three controls go on
+            alone — order on the left, the mark in the middle, WhatsApp on the
+            right — each carrying its own ground so it reads on whatever
+            scrolls underneath.
+          */}
+          <div
+            className={`sm:hidden flex items-center justify-between gap-1 rounded-full transition-all duration-300 ${
+              isScrolled
+                ? 'border border-transparent bg-transparent px-0 py-0 shadow-none backdrop-blur-none'
+                : 'border border-white/20 bg-ink/45 px-2 py-1.5 shadow-lg shadow-ink/25 backdrop-blur-xl'
+            }`}
+          >
             <button
               onClick={() => onOpenCheckoutModal()}
               id="nav-btn-ordina-mobile"
               aria-label="Vedi i pacchetti e ordina"
-              className="glass-brand flex h-9 items-center gap-1.5 rounded-full pl-2.5 pr-3 text-[12px] font-bold text-white"
+              className={`glass-brand flex items-center gap-1.5 rounded-full pl-2.5 pr-3 text-[12px] font-bold text-white transition-all duration-300 ${
+                isScrolled ? 'h-11 shadow-xl shadow-brand/30' : 'h-9'
+              }`}
             >
               <Layers className="h-4 w-4" />
               <span>Ordina</span>
             </button>
 
             <a href="#" className="flex items-center gap-2" aria-label="Italia IPTV">
-              <LogoMark className="w-[30px] h-[30px]" />
-              <span className="font-display text-[17px] font-bold leading-none tracking-[-0.03em] text-white">
-                italia<span className="text-brand-light">iptv</span>
-              </span>
+              <LogoMark
+                className={`transition-all duration-300 ${
+                  isScrolled ? 'w-11 h-11 shadow-xl shadow-ink/25 ring-1 ring-white/60' : 'w-[30px] h-[30px]'
+                }`}
+              />
+              {!isScrolled && (
+                <span className="font-display text-[17px] font-bold leading-none tracking-[-0.03em] text-white">
+                  italia<span className="text-brand-light">iptv</span>
+                </span>
+              )}
             </a>
 
             <a
@@ -77,12 +98,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Scrivici su WhatsApp"
-              className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-colors active:bg-white/15"
+              className={`flex items-center justify-center rounded-full transition-all duration-300 ${
+                isScrolled
+                  ? 'h-11 w-11 bg-canvas text-ink shadow-xl shadow-ink/20 ring-1 ring-ink/10'
+                  : 'h-9 w-9 text-white active:bg-white/15'
+              }`}
             >
               <WhatsAppIcon className="w-[21px] h-[21px]" />
             </a>
           </div>
-
 
           <div className="hidden sm:flex h-16 lg:h-18 items-center justify-between gap-4">
             <a href="#" className="shrink-0" id="nav-logo" aria-label="Italia IPTV">
