@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowUpRight, Menu, X, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Layers } from 'lucide-react';
 import { Logo, LogoMark } from './Logo';
 import { CONTACT_LINK } from '../data/contact';
 import { WhatsAppIcon } from './WhatsAppIcon';
@@ -24,7 +24,6 @@ const LINKS: { id: string; label: string }[] = [
  */
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 16);
@@ -35,7 +34,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
 
 
   const go = (id: string) => {
-    setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -58,12 +56,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
           */}
           <div className="sm:hidden flex items-center justify-between gap-1 rounded-full border border-white/20 bg-ink/45 px-2 py-1.5 shadow-lg shadow-ink/25 backdrop-blur-xl">
             <button
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-label={menuOpen ? 'Chiudi il menu' : 'Apri il menu'}
-              aria-expanded={menuOpen}
-              className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-colors active:bg-white/15"
+              onClick={() => onOpenCheckoutModal()}
+              id="nav-btn-ordina-mobile"
+              aria-label="Vedi i pacchetti e ordina"
+              className="glass-brand flex h-9 items-center gap-1.5 rounded-full pl-2.5 pr-3 text-[12px] font-bold text-white"
             >
-              {menuOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
+              <Layers className="h-4 w-4" />
+              <span>Ordina</span>
             </button>
 
             <a href="#" className="flex items-center gap-2" aria-label="Italia IPTV">
@@ -84,32 +83,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCheckoutModal }) => {
             </a>
           </div>
 
-          {/* Menu panel, hanging under the pill */}
-          {menuOpen && (
-            <div className="sm:hidden mt-2 rounded-2xl border border-white/20 bg-ink/55 p-3 shadow-xl shadow-ink/30 backdrop-blur-xl">
-              <div className="grid grid-cols-2 gap-2">
-                {LINKS.map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => go(link.id)}
-                    className="flex items-center justify-between rounded-lg bg-white/10 px-3 py-2.5 text-xs font-semibold text-white active:bg-white/20"
-                  >
-                    <span>{link.label}</span>
-                    <ChevronRight className="w-3.5 h-3.5 opacity-60" />
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  onOpenCheckoutModal();
-                }}
-                className="glass-brand mt-2 w-full rounded-xl py-3 text-sm font-bold text-white"
-              >
-                Vedi i pacchetti
-              </button>
-            </div>
-          )}
 
           <div className="hidden sm:flex h-16 lg:h-18 items-center justify-between gap-4">
             <a href="#" className="shrink-0" id="nav-logo" aria-label="Italia IPTV">
