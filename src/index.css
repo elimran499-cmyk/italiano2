@@ -19,6 +19,14 @@
   --color-brand-soft: #e6eeff;
   --color-brand-light: #4d8cff;
 
+  /* Premium VIP runs on its own family, so the tier is a different colour and
+     not just a different label. */
+  --color-vip: #7c3aed;
+  --color-vip-deep: #5b21b6;
+  --color-vip-light: #a855f7;
+  --color-vip-accent: #c026d3;
+  --color-vip-soft: #f6efff;
+
   --color-italy-green: #00b463;
   --color-italy-white: #ffffff;
   --color-italy-red: #ef2b3f;

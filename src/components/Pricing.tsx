@@ -68,7 +68,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                       transition={pill}
                       className={`absolute inset-0 rounded-xl shadow-md ${
                         id === 'premium'
-                          ? 'bg-gradient-to-r from-brand to-teal-400 shadow-brand/30'
+                          ? 'bg-gradient-to-r from-vip to-vip-accent shadow-vip/30'
                           : 'bg-ink'
                       }`}
                     />
@@ -132,10 +132,10 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                 key={duration.id}
                 className={`relative flex flex-col rounded-2xl transition-all duration-300 ${
                   isVip
-                    ? `p-[1.5px] bg-gradient-to-br from-brand via-teal-400 to-brand-deep ${
+                    ? `p-[1.5px] bg-gradient-to-br from-vip via-vip-accent to-vip-deep ${
                         isDeal
-                          ? 'shadow-2xl shadow-brand/30'
-                          : 'shadow-lg shadow-brand/15 hover:shadow-xl hover:shadow-brand/25'
+                          ? 'shadow-2xl shadow-vip/30'
+                          : 'shadow-lg shadow-vip/15 hover:shadow-xl hover:shadow-vip/25'
                       }`
                     : isDeal
                       ? 'bg-canvas border-2 border-brand shadow-2xl shadow-brand/15'
@@ -144,7 +144,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
               >
                 {/* Deal badge */}
                 {isDeal && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-brand to-teal-400 text-white text-[11px] font-display font-bold px-4 py-1.5 rounded-full shadow-lg shadow-brand/25 uppercase tracking-[0.12em] whitespace-nowrap">
+                  <div
+                    className={`absolute -top-3.5 left-1/2 -translate-x-1/2 z-10 text-white text-[11px] font-display font-bold px-4 py-1.5 rounded-full shadow-lg uppercase tracking-[0.12em] whitespace-nowrap ${
+                      isVip
+                        ? 'bg-gradient-to-r from-vip to-vip-accent shadow-vip/30'
+                        : 'bg-brand shadow-brand/25'
+                    }`}
+                  >
                     {duration.note} · {duration.badge}
                   </div>
                 )}
@@ -163,9 +169,9 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     <>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand/8 to-transparent"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-vip/10 to-transparent"
                       />
-                      <span className="absolute top-5 right-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand to-teal-400 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-sm">
+                      <span className="absolute top-5 right-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-vip to-vip-accent px-2 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-sm">
                         <Crown className="w-3 h-3" />
                         VIP
                       </span>
@@ -173,16 +179,18 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                   )}
 
                   {/* Durata */}
-                  <p className="relative text-center text-xs sm:text-[13px] font-display font-bold uppercase tracking-[0.16em] mt-1 text-brand-deep">
+                  <p
+                    className={`relative text-center text-xs sm:text-[13px] font-display font-bold uppercase tracking-[0.16em] mt-1 ${
+                      isVip ? 'text-vip' : 'text-brand-deep'
+                    }`}
+                  >
                     {duration.label}
                   </p>
 
                   {/* Price — the digits roll on every tier and device change */}
                   <p
                     className={`relative mt-3 text-center font-display text-4xl sm:text-[2.75rem] font-bold leading-none ${
-                      isVip
-                        ? 'bg-gradient-to-br from-brand via-brand to-teal-500 bg-clip-text text-transparent'
-                        : 'text-ink'
+                      isVip ? 'text-vip-deep' : 'text-ink'
                     }`}
                   >
                     <RollingPrice value={formatEuro(price)} />
@@ -210,7 +218,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     rel="noopener noreferrer"
                     className={`relative mt-5 w-full py-3.5 rounded-full font-display font-bold text-sm transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
                       isVip
-                        ? 'bg-gradient-to-r from-brand to-teal-400 text-white shadow-lg shadow-brand/30'
+                        ? 'bg-gradient-to-r from-vip to-vip-accent text-white shadow-lg shadow-vip/35'
                         : isDeal
                           ? 'bg-brand hover:bg-brand-deep text-white shadow-lg'
                           : 'bg-ink hover:bg-ink/90 text-white'
@@ -220,13 +228,13 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                     <span>{isVip ? 'Diventa VIP' : 'Ordina Ora'}</span>
                   </a>
 
-                  <div className={`relative mt-6 pt-5 border-t ${isVip ? 'border-brand/25' : 'border-ink/10'}`}>
+                  <div className={`relative mt-6 pt-5 border-t ${isVip ? 'border-vip/25' : 'border-ink/10'}`}>
                     {/* Tier chip + heading */}
                     <div className="flex items-center gap-2.5">
                       <span
                         className={`text-[10px] font-bold px-2.5 py-1 rounded-full shrink-0 ${
                           isVip
-                            ? 'bg-gradient-to-r from-brand to-teal-400 text-white'
+                            ? 'bg-gradient-to-r from-vip to-vip-accent text-white'
                             : 'bg-ink/8 text-ink-soft'
                         }`}
                       >
@@ -244,7 +252,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenCheckoutModal }) => {
                           <span
                             className={`w-4.5 h-4.5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
                               isVip
-                                ? 'bg-gradient-to-br from-brand to-teal-400 text-white'
+                                ? 'bg-gradient-to-br from-vip to-vip-accent text-white'
                                 : 'bg-ink/8 text-ink-soft'
                             }`}
                           >
