@@ -5,6 +5,12 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    build: {
+      // Channel logos are dozens of small files; inlining them as base64 buried
+      // ~84KB gzip of artwork inside the JS chunk instead of letting the browser
+      // cache them as images.
+      assetsInlineLimit: 1024,
+    },
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

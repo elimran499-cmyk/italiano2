@@ -1,63 +1,42 @@
-import React, { useId } from 'react';
+import React from 'react';
+import boltUrl from '../assets/logo-bolt-256.png';
 
 /**
- * Italia IPTV mark, second identity.
+ * Italia IPTV mark: the bolt, filled with the tricolore running top to bottom.
  *
- * A hard-cornered chevron pair — the fast-forward cue — cut out of a rounded
- * tile, with the tricolore running through the cut and an azzurro tile behind
- * it. Geometric where the first identity was a hand-drawn star.
+ * Shipped as a PNG rather than inline vector so the same file backs the page,
+ * the tab icon, the app icon and the Open Graph card — one asset a crawler can
+ * fetch and index directly.
+ *
+ * The mark's middle band is white, so on light ground it sits on an ink tile;
+ * `inverted` drops the tile for dark ground where the white already reads.
  */
 
 interface MarkProps {
-  /** Lightens the tile, for use on the deepest grounds. */
+  /** Drops the tile, for dark backgrounds. */
   inverted?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
-export const LogoMark: React.FC<MarkProps> = ({ inverted = false, className = '', style }) => {
-  // Unique per instance: a shared id would break the moment the first holder
-  // of the definition unmounted.
-  const uid = useId().replace(/:/g, '');
-
-  return (
-    <span
-      className={`inline-flex items-center justify-center shrink-0 ${className}`}
-      style={style}
-    >
-      <svg
-        viewBox="0 0 64 64"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMid meet"
-        className="block w-full h-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id={`tile-${uid}`} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor={inverted ? '#1d2735' : '#2b7fff'} />
-            <stop offset="100%" stopColor={inverted ? '#121824' : '#1a5fd6'} />
-          </linearGradient>
-          <linearGradient id={`flag-${uid}`} x1="0" y1="0" x2="1" y2="0.3">
-            <stop offset="0%" stopColor="#00c46a" />
-            <stop offset="34%" stopColor="#00c46a" />
-            <stop offset="46%" stopColor="#ffffff" />
-            <stop offset="58%" stopColor="#ffffff" />
-            <stop offset="70%" stopColor="#ff3b4e" />
-            <stop offset="100%" stopColor="#ff3b4e" />
-          </linearGradient>
-        </defs>
-
-        {/* Tile */}
-        <rect x="0" y="0" width="64" height="64" rx="18" fill={`url(#tile-${uid})`} />
-
-        {/* Chevron pair, in the tricolore */}
-        <path d="M14 18 L30 32 L14 46 L21.5 46 L37.5 32 L21.5 18 Z" fill={`url(#flag-${uid})`} />
-        <path d="M32 18 L48 32 L32 46 L39.5 46 L55.5 32 L39.5 18 Z" fill={`url(#flag-${uid})`} opacity="0.55" />
-      </svg>
-    </span>
-  );
-};
+export const LogoMark: React.FC<MarkProps> = ({ inverted = false, className = '', style }) => (
+  <span
+    className={`inline-flex items-center justify-center shrink-0 ${
+      inverted ? '' : 'bg-ink rounded-[26%]'
+    } ${className}`}
+    style={style}
+  >
+    <img
+      src={boltUrl}
+      alt=""
+      aria-hidden="true"
+      width={256}
+      height={256}
+      decoding="async"
+      className={`block object-contain ${inverted ? 'w-full h-full' : 'w-[72%] h-[72%]'}`}
+    />
+  </span>
+);
 
 interface LogoProps {
   inverted?: boolean;

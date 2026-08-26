@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { StatsBand } from './components/StatsBand';
-import { ChannelShowcase } from './components/ChannelShowcase';
-import { FilmsSeries } from './components/FilmsSeries';
-import { Features } from './components/Features';
-import { DeviceCompatibility } from './components/DeviceCompatibility';
-import { SpeedCheckWidget } from './components/SpeedCheckWidget';
-import { Pricing } from './components/Pricing';
-import { SetupSteps } from './components/SetupSteps';
-import { Testimonials } from './components/Testimonials';
-import { FaqSection } from './components/FaqSection';
-import { Footer } from './components/Footer';
-import { WhatsAppFloating } from './components/WhatsAppFloating';
 import { MobileNav } from './components/MobileNav';
 import { SplashIntro } from './components/SplashIntro';
+
+/*
+ * Only the hero and the band under it are needed to paint. Everything below is
+ * split out, so the first load carries the frame and the artwork instead of the
+ * whole page — the pricing grid alone pulls in the animation library.
+ */
+const ChannelShowcase = lazy(() =>
+  import('./components/ChannelShowcase').then((m) => ({ default: m.ChannelShowcase }))
+);
+const FilmsSeries = lazy(() =>
+  import('./components/FilmsSeries').then((m) => ({ default: m.FilmsSeries }))
+);
+const Features = lazy(() => import('./components/Features').then((m) => ({ default: m.Features })));
+const DeviceCompatibility = lazy(() =>
+  import('./components/DeviceCompatibility').then((m) => ({ default: m.DeviceCompatibility }))
+);
+const SpeedCheckWidget = lazy(() =>
+  import('./components/SpeedCheckWidget').then((m) => ({ default: m.SpeedCheckWidget }))
+);
+const Pricing = lazy(() => import('./components/Pricing').then((m) => ({ default: m.Pricing })));
+const SetupSteps = lazy(() =>
+  import('./components/SetupSteps').then((m) => ({ default: m.SetupSteps }))
+);
+const Testimonials = lazy(() =>
+  import('./components/Testimonials').then((m) => ({ default: m.Testimonials }))
+);
+const FaqSection = lazy(() =>
+  import('./components/FaqSection').then((m) => ({ default: m.FaqSection }))
+);
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
+const WhatsAppFloating = lazy(() =>
+  import('./components/WhatsAppFloating').then((m) => ({ default: m.WhatsAppFloating }))
+);
+
+/** Holds the scroll position while a section's chunk arrives. */
+const SectionFallback: React.FC = () => <div className="min-h-[40vh]" />;
 
 export default function App() {
   // Gli ordini passano da WhatsApp: ogni CTA "vedi i pacchetti" porta
@@ -36,8 +61,10 @@ export default function App() {
       <main id="main-content">
         <Hero onOpenCheckoutModal={() => handleViewPlans()} />
 
-        {/* The four headline figures, on a dark band under the hero */}
+        {/* The four headline figures, on a band under the hero */}
         <StatsBand />
+
+        <Suspense fallback={<SectionFallback />}>
 
         {/* Channel Showcase & Live Guide */}
         <ChannelShowcase onOpenCheckoutModal={() => handleViewPlans()} />
@@ -65,12 +92,14 @@ export default function App() {
 
         {/* FAQ Accordion Section */}
         <FaqSection />
+        </Suspense>
       </main>
 
       {/* Footer */}
-      <Footer onOpenCheckoutModal={() => handleViewPlans()} />
-
-      <WhatsAppFloating />
+      <Suspense fallback={<SectionFallback />}>
+        <Footer onOpenCheckoutModal={() => handleViewPlans()} />
+        <WhatsAppFloating />
+      </Suspense>
 
       {/* Floating bottom navigation, phones and tablets only */}
       <MobileNav />
