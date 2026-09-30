@@ -3,10 +3,10 @@
  * una chat con il numero qui sotto e un messaggio precompilato.
  * Numero in formato internazionale senza + e senza spazi.
  */
-export const WHATSAPP_NUMBER = '447832486269';
+export const WHATSAPP_NUMBER = '447414662070';
 
 /** Formato di visualizzazione del numero, ad esempio nel footer. */
-export const WHATSAPP_DISPLAY = '+44 7832 486269';
+export const WHATSAPP_DISPLAY = '+44 7414 662070';
 
 export const whatsappLink = (message: string): string =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
